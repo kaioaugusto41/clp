@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 def conecta_db():
-  con = psycopg2.connect(host='localhost', 
+  con = psycopg2.connect(host='10.180.1.32', 
                          port='5432',
                          database='clp',
                          user='postgres', 
