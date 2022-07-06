@@ -10,8 +10,7 @@ from converte_valoes import converte_valores
 
 while True:
     
-    c = ModbusTcpClient(host='10.180.1.250', port=502, timeout=99999)                                                                # Faz a conexão com o CLP
-    
+    c = ModbusTcpClient(host='10.180.1.250', port=502, timeout=999999)                                                                # Faz a conexão com o CLP
     
     
     if not c.connect():                                                                                               # Se não houver conexão com o CLP...
