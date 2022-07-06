@@ -1,4 +1,5 @@
 
+from socket import timeout
 from pymodbus.client.sync import ModbusTcpClient
 import time
 from con_postgre import cadastra_dado
@@ -9,7 +10,7 @@ from converte_valoes import converte_valores
 
 while True:
     
-    c = ModbusTcpClient(host='10.180.1.250', port=502)                                                                # Faz a conexão com o CLP
+    c = ModbusTcpClient(host='10.180.1.250', port=502, timeout=99999)                                                                # Faz a conexão com o CLP
     
     
     
@@ -34,7 +35,7 @@ while True:
                         else:                                                                                         # Mas se tiver erro na variável status_linha...
                             print('****************************DEU ERRO MAS FOI CONTORNADO')
                             while status_linha.isError():                                                             # Enquanto houver erro na variável status_linha...
-                                print('erro')
+                                print('erro1')
                                 status_linha = c.read_coils(40008, 1)                                                 # a variável status_linha receberá novo valor atualizado.
                                 if not status_linha.isError():                                                        # Se não houver erro no novo valor...
                                     break                                                                             # Para o loop
@@ -44,6 +45,7 @@ while True:
                         cadastra_dado(converte_valores(corrente_media))                                               # Cadastra no banco a corrente média
                     else:                                                                                             # Mas se tiver problema na variável da corrente média...
                         while True:                                                                                   # Enquanto verdadeiro...  
+                            print('erro2', converte_valores(corrente_media))
                             corrente_media = c.read_holding_registers(12004, 10)                                      # Atualiza a variável corrente_media
                             if not corrente_media.isError() and converte_valores(corrente_media) != 'nan':            # Verifica novamente se não há nenhum erro na variável correte_media
                                 cadastra_dado(converte_valores(corrente_media))                                       # Cadastra no banco de dados a corrente média do motor
