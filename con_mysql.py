@@ -14,7 +14,7 @@ def cadastra_dado(valor):
   cursor = con.cursor()
   data_atual = datetime.now()
   print(str(data_atual)[:16])
-  cursor.execute("UPDATE dados SET valor='{}', status='{}' WHERE status='testando' AND linha='B'".format(valor, 'testado'))
+  cursor.execute("UPDATE op_teste SET vl_teste={}, teste_clp={} WHERE status='testando' AND linha='A'".format(valor, 2))
   con.commit()
   print('Registro salvo com sucesso.')
   print('___________________________________')
