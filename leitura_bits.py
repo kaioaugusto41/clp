@@ -2,7 +2,7 @@
 from socket import timeout
 from pymodbus.client.sync import ModbusTcpClient
 import time
-from con_postgre import cadastra_dado
+from con_mysql import cadastra_dado
 from converte_valoes import converte_valores
 
 
